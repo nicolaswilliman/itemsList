@@ -26,5 +26,6 @@ RUN a2ensite vhost.conf
 
 WORKDIR /var/www/
 
-RUN composer install
+COPY . ./
 
+RUN composer install
