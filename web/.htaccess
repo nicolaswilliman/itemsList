@@ -1,0 +1,8 @@
+Options -Indexes
+
+# Follow symbolic links
+Options +FollowSymLinks
+
+# Default handler
+DirectoryIndex index.php
+

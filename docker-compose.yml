@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  web:
+    build:
+      context: ./web
+      dockerfile: docker/Dockerfile
+    container_name: "challenge-web"
+    ports:
+      - "80:80"     
+    volumes:
+      - ./web/:/var/www/
+      - ./web/log/web/:/var/log/web/
+      - ./web/log/apache2/:/var/log/apache2/
+      - /etc/hosts:/etc/hosts
