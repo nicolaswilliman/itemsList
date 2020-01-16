@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 COPY docker/php.ini /usr/local/etc/php/
 
 RUN pecl install mongodb \
-	&& echo "extension=mongodb.so" > /usr/local/etc/php/php.ini
+	&& echo "extension=mongodb.so" >> /usr/local/etc/php/php.ini
 
 #RUN a2enmod rewrite
 #RUN a2enmod headers

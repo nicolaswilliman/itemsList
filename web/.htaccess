@@ -4,5 +4,5 @@ Options -Indexes
 Options +FollowSymLinks
 
 # Default handler
-DirectoryIndex index.php
+DirectoryIndex index.php index.html
 

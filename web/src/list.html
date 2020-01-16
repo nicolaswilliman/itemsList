@@ -1,0 +1,47 @@
+
+<input type="button" id="create" value="Create new item">
+<div id="list"></div>
+
+
+<script>
+	function displayItems(){
+		$(() => {
+			$.ajax({
+				url: 'get.php',
+				type: 'get',
+				success: response => {
+					let html = '';
+					html += '<ul id="items">';
+					$.each(JSON.parse(response), (key, data) => {
+						html += '<li class="item">' + data.desc + '</li>'
+					});
+					html += '</ul>';
+					$('#list').html(html);
+
+					let items = $('#items');
+					items.sortable({
+						update: (event, ui) => {
+							let list = [];
+							$('#items li').each((idx, elem) => {
+								list[idx] = $(elem).html();
+							});
+
+							//SAVE ITEMS HERE!
+						}
+					});
+					items.disableSelection();
+				},
+				error: (xhr, ajaxOptions, thrownError) => {
+					let errorMsg = 'Request failed: ' + xhr.responseText;
+					$('#content').html(errorMsg);
+				}
+			});
+		});
+	}
+	displayItems();
+	$('#create').click(() => {
+		url = "create.html";
+		url += '?_=' + (new Date()).getTime();
+		$('#content').load(url);
+	});
+</script>

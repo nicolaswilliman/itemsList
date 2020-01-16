@@ -9,7 +9,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./web/src:/var/www/
+      - ./web/src/:/var/www/
       - ./web/log/web/:/var/log/web/
       - ./web/log/apache2/:/var/log/apache2/
       - /etc/hosts:/etc/hosts

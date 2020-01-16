@@ -1,0 +1,16 @@
+
+<span>Description:</span>
+<textarea rows="1" cols="50" maxlength="300"></textarea>
+<br>
+<span>Image:</span>
+<input type="file" id="image">
+<br>
+<input type="button" id="submit" value="Create">&nbsp; <input type="button" id="cancel" value="Cancel">&nbsp;
+
+<script>
+	$('#cancel').click( e => {
+		url = "list.html";
+		url += '?_=' + (new Date()).getTime();
+		$('#content').load(url);
+	});
+</script>

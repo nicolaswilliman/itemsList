@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Challenge</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<style>
+		li:hover {
+    		cursor: move;
+		}
+	</style>
+</head>
+
+<body>
+	<h1 id="title">
+	</h1>
+	<div id="content">
+
+	</div>
+	<script>
+		$(() => {
+			$('#content').load('list.html');
+		});
+	</script>
+</body>
+</html>
+
