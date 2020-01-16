@@ -7,7 +7,7 @@
 	function displayItems(){
 		$(() => {
 			$.ajax({
-				url: 'get.php',
+				url: 'src/get.php',
 				type: 'get',
 				success: response => {
 					let html = '';
@@ -40,7 +40,7 @@
 	}
 	displayItems();
 	$('#create').click(() => {
-		url = "create.html";
+		url = "pages/create.html";
 		url += '?_=' + (new Date()).getTime();
 		$('#content').load(url);
 	});

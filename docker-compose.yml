@@ -5,11 +5,35 @@ services:
     build:
       context: ./web
       dockerfile: docker/Dockerfile
-    container_name: "challenge-web"
+    container_name: 'challenge-web'
     ports:
-      - "80:80"
+      - '80:80'
     volumes:
-      - ./web/src/:/var/www/
+      - ./web/:/var/www/
       - ./web/log/web/:/var/log/web/
       - ./web/log/apache2/:/var/log/apache2/
       - /etc/hosts:/etc/hosts
+    depends_on:
+      - database
+    networks:
+      - backend
+  database:
+    image: 'mongo'
+    container_name: 'mongo-db'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=testdb
+      - MONGODB_DATA_DIR=/data/db
+    volumes:
+      - mongodbdata:/data/db
+    ports:
+      - '27017:27017'
+    networks:
+      - backend
+networks:
+    backend:
+        driver: bridge
+volumes:
+    mongodbdata:
+        driver: local

@@ -11,6 +11,13 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd
 
+RUN apt-get install -y git libsodium-dev
+
+RUN apt-get install -y \
+        libzip-dev \
+        zip \
+  && docker-php-ext-install zip
+
 COPY docker/php.ini /usr/local/etc/php/
 
 RUN pecl install mongodb \
