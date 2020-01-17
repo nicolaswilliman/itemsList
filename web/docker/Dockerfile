@@ -20,11 +20,9 @@ RUN apt-get install -y \
 
 COPY docker/php.ini /usr/local/etc/php/
 
+RUN apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev
 RUN pecl install mongodb \
 	&& echo "extension=mongodb.so" >> /usr/local/etc/php/php.ini
-
-#RUN a2enmod rewrite
-#RUN a2enmod headers
 
 RUN chmod -R 777 /var/log
 
