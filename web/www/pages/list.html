@@ -7,7 +7,7 @@
 	function displayItems(){
 		$(() => {
 			$.ajax({
-				url: 'src/get.php',
+				url: 'src/api/get.php',
 				type: 'get',
 				success: response => {
 					let html = '';

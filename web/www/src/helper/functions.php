@@ -1,8 +1,11 @@
 <?php
 
+require_once(dirname(dirname(__FILE__)). "/data_access/data_access.php");
+
 class Functions {
 	public static function getItems(){
 		$items = array();
+		
 
 		// MOKE CASES
 		// $item = new stdClass();
