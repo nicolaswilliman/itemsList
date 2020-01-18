@@ -26,4 +26,13 @@ class DataAccess {
 		}
 		return $items;
 	}
+
+	public static function createItem($description, $image){
+		$connection = self::getInstance();
+		$items = $connection->challengedb->items;
+		$item = array(
+			"description" => $description
+		);
+		$items->insertOne($item);
+	}
 }

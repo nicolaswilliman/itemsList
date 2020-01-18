@@ -17,13 +17,15 @@
 	$('#submit').click(e => {
 		//validate
 		$.ajax({
-			url: 'src/api/create.php',
+			url: 'src/api/post.php',
 			type: 'post',
 			data: {
 				description: $('#description').val()
 			},
 			success: response => {
-				console.log(response);
+				url = "pages/list.html";
+				url += '?_=' + (new Date()).getTime();
+				$('#content').load(url);
 			},
 			error: (xhr, status, error) => {
 

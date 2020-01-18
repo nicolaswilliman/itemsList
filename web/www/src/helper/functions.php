@@ -19,13 +19,18 @@ class Functions {
 		return $items;
 	}
 
-	public static function saveItem($id, $image, $desc){
+	public static function saveItem($id, $desc, $image){
 		if($id){
 			//edit
 
 		}else{
-			//create
-
+			DataAccess::createItem($desc, $image);
 		}
+	}
+
+	public static function response($data, $httpCode){
+		http_response_code($httpCode);
+		echo json_encode($data);
+		exit;
 	}
 }
