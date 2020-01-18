@@ -3,12 +3,14 @@
 class Functions {
 	public static function getItems(){
 		$items = array();
-		$item = new stdClass();
-		$item->desc = "First Item";
-		$item2 = new stdClass();
-		$item2->desc = "Second Item";
 
-		array_push($items, $item, $item2);
+		// MOKE CASES
+		// $item = new stdClass();
+		// $item->desc = "First Item";
+		// $item2 = new stdClass();
+		// $item2->desc = "Second Item";
+
+		// array_push($items, $item, $item2);
 
 		return $items;
 	}
