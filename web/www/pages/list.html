@@ -35,7 +35,7 @@
 						$('#content').load(url);
 					});
 				},
-				error: (xhr, ajaxOptions, thrownError) => {
+				error: (xhr, status, error) => {
 					let errorMsg = 'Request failed';
 					$('#content').html(errorMsg);
 				}
