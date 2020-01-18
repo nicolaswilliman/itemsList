@@ -4,7 +4,6 @@
 
 
 <script>
-	function displayItems(){
 		$(() => {
 			$.ajax({
 				url: 'src/api/get.php',
@@ -13,7 +12,7 @@
 					let html = '';
 					html += '<ul id="items">';
 					$.each(JSON.parse(response), (key, data) => {
-						html += '<li class="item">' + data.desc + '</li>'
+						html += '<li class="item">' + data.description + '</li>'
 					});
 					html += '</ul>';
 					$('#list').html(html);
@@ -30,18 +29,16 @@
 						}
 					});
 					items.disableSelection();
+					$('#create').click(() => {
+						url = "pages/create.html";
+						url += '?_=' + (new Date()).getTime();
+						$('#content').load(url);
+					});
 				},
 				error: (xhr, ajaxOptions, thrownError) => {
-					let errorMsg = 'Request failed: ' + xhr.responseText;
+					let errorMsg = 'Request failed';
 					$('#content').html(errorMsg);
 				}
 			});
 		});
-	}
-	displayItems();
-	$('#create').click(() => {
-		url = "pages/create.html";
-		url += '?_=' + (new Date()).getTime();
-		$('#content').load(url);
-	});
 </script>

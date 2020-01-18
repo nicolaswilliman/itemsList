@@ -20,7 +20,9 @@
 	</div>
 	<script>
 		$(() => {
-			$('#content').load('pages/list.html');
+			let url = 'pages/list.html';
+			url += '?_=' + (new Date()).getTime();
+			$('#content').load(url);
 		});
 	</script>
 </body>
