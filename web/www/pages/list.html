@@ -16,7 +16,7 @@
 					let html = '';
 					html += '<ul id="items">';
 					$.each(JSON.parse(response), (key, data) => {
-						html += '<li class="item">' + data.description + '</li>'
+						html += '<li class="item"><a href data-id="' + data._id.$oid +'">Edit</a>&nbsp<span>' + data.description + '</span></li>';
 					});
 					html += '</ul>';
 					$('#list').html(html);
@@ -32,11 +32,20 @@
 							//SAVE ITEMS HERE!
 						}
 					});
+
 					items.disableSelection();
+
 					$('#create').click(() => {
 						url = "pages/create.html";
 						url += '?_=' + (new Date()).getTime();
 						$('#content').load(url);
+					});
+
+					$('a').click(function(){
+						console.log($(this).data('id'));
+
+						//$('#content').load(url,  {id: 'test'})
+						return false;
 					});
 				},
 				error: (xhr, status, error) => {

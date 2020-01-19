@@ -2,14 +2,18 @@
 
 require_once(dirname(dirname(__FILE__))."/helper/functions.php");
 
+$id = $_POST["id"];
+if(!$id){
+	$id = 0;
+}
 $description = $_POST["description"];
 
 if(!$description){
-	Functions::response("Invalid description", http_response_code(400));
+	http_response_code(400);
+	echo "Invalid description";
+	exit;
 }
 
-Functions::saveItem(0, $description, "");
-
-Functions::response(new stdClass(), http_response_code(200));
+Functions::saveItem($id, $description, "");
 
 exit;

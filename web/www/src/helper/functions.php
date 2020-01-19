@@ -4,9 +4,6 @@ require_once(dirname(dirname(__FILE__)). "/data_access/repository.php");
 
 class Functions {
 	public static function getItems(){
-
-
-
 		// MOKE CASES
 		// $items = array();
 		// $item = new stdClass();
@@ -21,16 +18,13 @@ class Functions {
 
 	public static function saveItem($id, $desc, $image){
 		if($id){
-			//edit
-
+			DataAccess::updateItem($id, $desc, $image);
 		}else{
 			DataAccess::createItem($desc, $image);
 		}
 	}
 
-	public static function response($data, $httpCode){
-		http_response_code($httpCode);
-		echo json_encode($data);
-		exit;
+	public static function deleteItem($id){
+
 	}
 }

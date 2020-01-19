@@ -35,4 +35,14 @@ class DataAccess {
 		);
 		$items->insertOne($item);
 	}
+
+	public static function updateItem($id, $description, $image){
+		$connection = self::getInstance();
+		$items = $connection->challengedb->items;
+		$items->updateOne(['_id' => new \MongoDB\BSON\ObjectID($id)], ['$set' => ["description" => $description]]);
+	}
+
+	public static function deleteItem($id){
+
+	}
 }
