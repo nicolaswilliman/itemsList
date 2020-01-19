@@ -5,16 +5,20 @@ include_once(dirname(dirname(__FILE__)) . "/src/helper/functions.php");
 $id = $_GET["id"];
 if($id){
 	$item = Functions::getItem($id);
+	$submitName = "Update";
+}else{
+	$submitName = "Create";
 }
+
 ?>
 
 <span>Description:</span>
-<textarea id="description" rows="1" cols="50" maxlength="300"><?php echo $item->description?></textarea>
+<input type="text" id="description" maxlength="300" value="<?php echo $item->description?>">
 <br>
 <span>Image:</span>
 <input type="file" id="image">
 <br>
-<input type="button" id="submit" value="Create">&nbsp; <input type="button" id="cancel" value="Cancel">&nbsp;
+<input type="button" id="submit" value="<?php echo $submitName ?>">&nbsp; <input type="button" id="cancel" value="Cancel">&nbsp;
 
 <script>
 	$('#cancel').click(e => {
