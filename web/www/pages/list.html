@@ -1,10 +1,12 @@
+<h1 id="title"></h1>
+
 <style>
 	li:hover {
 		cursor: move;
 	}
 </style>
-<input type="button" id="create" value="Create new item">
 <div id="list"></div>
+<input type="button" id="create" value="Create new item">
 
 <script>
 		$(() => {
@@ -14,7 +16,11 @@
 				success: response => {
 					let html = '';
 					html += '<ul id="items">';
-					$.each(JSON.parse(response), (key, data) => {
+
+					const parsedResponse = JSON.parse(response);
+
+					$('#title').text('Items list (COUNT: ' + parsedResponse.count + ')');
+					$.each(parsedResponse.items, (key, data) => {
 						html += '<li class="item">';
 						html += '<a class="edit" href data-id="' + data._id.$oid +'">Edit</a>&nbsp';
 						html += '<a class="delete" href data-id="' + data._id.$oid +'" data-desc="' + data.description +'">Delete</a>&nbsp';
@@ -24,7 +30,7 @@
 					html += '</ul>';
 					$('#list').html(html);
 
-					let items = $('#items');
+					const items = $('#items');
 					items.sortable({
 						update: (event, ui) => {
 							let list = [];
@@ -32,7 +38,7 @@
 								list[idx] = $(elem).html();
 							});
 
-							//SAVE ITEMS HERE!
+							//SAVE ITEMS ORDER HERE!
 						}
 					});
 
@@ -74,7 +80,7 @@
 					});
 				},
 				error: (xhr, status, error) => {
-					let errorMsg = 'Request failed';
+					const errorMsg = 'Request failed';
 					$('#content').html(errorMsg);
 				}
 			});

@@ -5,13 +5,17 @@ include_once(dirname(dirname(__FILE__)) . "/src/helper/functions.php");
 $id = $_GET["id"];
 if($id){
 	$item = Functions::getItem($id);
+	$description = $item->description;
+	$title = "Edit item";
 	$submitName = "Update";
 }else{
+	$description = "";
+	$title = "New item";
 	$submitName = "Create";
 }
 
 ?>
-
+<h1><?php echo $title?></h1>
 <span>Description:</span>
 <input type="text" id="description" maxlength="300" value="<?php echo $item->description?>">
 <br>
@@ -22,7 +26,7 @@ if($id){
 
 <script>
 	$('#cancel').click(e => {
-		url = "pages/list.html";
+		let url = "pages/list.html";
 		url += '?_=' + (new Date()).getTime();
 		$('#content').load(url);
 	});
@@ -38,12 +42,12 @@ if($id){
 				image: ""
 			},
 			success: response => {
-				url = "pages/list.html";
+				let url = "pages/list.html";
 				url += '?_=' + (new Date()).getTime();
 				$('#content').load(url);
 			},
 			error: (xhr, status, error) => {
-				console.log(xhr.response);
+
 			}
 		});
 	});
