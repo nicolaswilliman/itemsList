@@ -12,19 +12,24 @@ class Functions {
 		// $item2->desc = "Second Item";
 
 		// array_push($items, $item, $item2);
-		$items = DataAccess::getAllItems();
+		$items = Repository::getAllItems();
 		return $items;
 	}
 
 	public static function saveItem($id, $desc, $image){
 		if($id){
-			DataAccess::updateItem($id, $desc, $image);
+			Repository::updateItem($id, $desc, $image);
 		}else{
-			DataAccess::createItem($desc, $image);
+			Repository::createItem($desc, $image);
 		}
 	}
 
 	public static function deleteItem($id){
 
+	}
+
+	public static function getItem($id){
+		$item = Repository::getItem($id);
+		return $item;
 	}
 }

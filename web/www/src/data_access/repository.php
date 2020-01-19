@@ -4,9 +4,9 @@ require_once(dirname(dirname(dirname(dirname(__FILE__)))) . "/vendor/autoload.ph
 
 use MongoDB\Client as Mongo;
 
+//use \MongoDB\BSON\ObjectID as MongoID;
 
-
-class DataAccess {
+class Repository {
 
 	private static $instance = null;
 
@@ -44,5 +44,11 @@ class DataAccess {
 
 	public static function deleteItem($id){
 
+	}
+
+	public static function getItem($id){
+		$connection = self::getInstance();
+		$item = $connection->challengedb->items->findOne(array('_id' => new \MongoDB\BSON\ObjectID($id)));
+		return $item;
 	}
 }

@@ -6,7 +6,6 @@
 <input type="button" id="create" value="Create new item">
 <div id="list"></div>
 
-
 <script>
 		$(() => {
 			$.ajax({
@@ -36,15 +35,16 @@
 					items.disableSelection();
 
 					$('#create').click(() => {
-						let url = "pages/item.html";
+						let url = "pages/item.php";
 						url += '?_=' + (new Date()).getTime();
 						$('#content').load(url);
 					});
 
 					$('a').click(function(){
-						let url = "pages/item.html";
+						let url = "pages/item.php";
 						url += '?_=' + (new Date()).getTime();
-						$('#content').load(url,  {id: 'test'})
+						url += '&id=' + $(this).data('id');
+						$('#content').load(url);
 						return false;
 					});
 				},

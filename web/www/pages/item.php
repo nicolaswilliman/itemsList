@@ -1,5 +1,15 @@
+<?php
+
+include_once(dirname(dirname(__FILE__)) . "/src/helper/functions.php");
+
+$id = $_GET["id"];
+if($id){
+	$item = Functions::getItem($id);
+}
+?>
+
 <span>Description:</span>
-<textarea id="description" rows="1" cols="50" maxlength="300"></textarea>
+<textarea id="description" rows="1" cols="50" maxlength="300"><?php echo $item->description?></textarea>
 <br>
 <span>Image:</span>
 <input type="file" id="image">
