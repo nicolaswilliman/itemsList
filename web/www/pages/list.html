@@ -15,7 +15,11 @@
 					let html = '';
 					html += '<ul id="items">';
 					$.each(JSON.parse(response), (key, data) => {
-						html += '<li class="item"><a href data-id="' + data._id.$oid +'">Edit</a>&nbsp<span>' + data.description + '</span></li>';
+						html += '<li class="item">';
+						html += '<a class="edit" href data-id="' + data._id.$oid +'">Edit</a>&nbsp';
+						html += '<a class="delete" href data-id="' + data._id.$oid +'">Delete</a>&nbsp';
+						html += '<span>' + data.description + '</span>';
+						html += '</li>';
 					});
 					html += '</ul>';
 					$('#list').html(html);
@@ -35,16 +39,35 @@
 					items.disableSelection();
 
 					$('#create').click(() => {
-						let url = "pages/item.php";
+						let url = 'pages/item.php';
 						url += '?_=' + (new Date()).getTime();
 						$('#content').load(url);
 					});
 
-					$('a').click(function(){
-						let url = "pages/item.php";
+					$('a.edit').click(function(){
+						let url = 'pages/item.php';
 						url += '?_=' + (new Date()).getTime();
 						url += '&id=' + $(this).data('id');
 						$('#content').load(url);
+						return false;
+					});
+
+					$('a.delete').click(function(){
+						$.ajax({
+							url: 'src/api/delete.php',
+							type: 'post',
+							data: {
+								id:$(this).data('id')
+							},
+							success: response => {
+								let url = 'pages/list.html';
+								url += '?_=' + (new Date()).getTime();
+								$('#content').load(url);
+							},
+							error: (xhr, status, error) => {
+
+							}
+						});
 						return false;
 					});
 				},

@@ -39,16 +39,18 @@ class Repository {
 	public static function updateItem($id, $description, $image){
 		$connection = self::getInstance();
 		$items = $connection->challengedb->items;
-		$items->updateOne(['_id' => new MongoID($id)], ['$set' => ["description" => $description]]);
+		$items->updateOne(["_id" => new MongoID($id)], ['$set' => ["description" => $description]]);
 	}
 
 	public static function deleteItem($id){
-
+		$connection = self::getInstance();
+		$items = $connection->challengedb->items;
+		$items->deleteOne([ "_id" => new MongoID($id) ]);
 	}
 
 	public static function getItem($id){
 		$connection = self::getInstance();
-		$item = $connection->challengedb->items->findOne(array('_id' => new MongoID($id)));
+		$item = $connection->challengedb->items->findOne(["_id" => new MongoID($id)]);
 		return $item;
 	}
 }

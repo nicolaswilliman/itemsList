@@ -29,7 +29,9 @@ if($id){
 			url: 'src/api/post.php',
 			type: 'post',
 			data: {
-				description: $('#description').val()
+				id: <?php echo "'".$id ."'"?>,
+				description: $('#description').val(),
+				image: ""
 			},
 			success: response => {
 				url = "pages/list.html";
@@ -37,7 +39,7 @@ if($id){
 				$('#content').load(url);
 			},
 			error: (xhr, status, error) => {
-
+				console.log(xhr.response);
 			}
 		});
 	});
