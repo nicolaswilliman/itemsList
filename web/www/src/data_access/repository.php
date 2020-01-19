@@ -4,7 +4,7 @@ require_once(dirname(dirname(dirname(dirname(__FILE__)))) . "/vendor/autoload.ph
 
 use MongoDB\Client as Mongo;
 
-//use \MongoDB\BSON\ObjectID as MongoID;
+use \MongoDB\BSON\ObjectID as MongoID;
 
 class Repository {
 
@@ -39,7 +39,7 @@ class Repository {
 	public static function updateItem($id, $description, $image){
 		$connection = self::getInstance();
 		$items = $connection->challengedb->items;
-		$items->updateOne(['_id' => new \MongoDB\BSON\ObjectID($id)], ['$set' => ["description" => $description]]);
+		$items->updateOne(['_id' => new MongoID($id)], ['$set' => ["description" => $description]]);
 	}
 
 	public static function deleteItem($id){
@@ -48,7 +48,7 @@ class Repository {
 
 	public static function getItem($id){
 		$connection = self::getInstance();
-		$item = $connection->challengedb->items->findOne(array('_id' => new \MongoDB\BSON\ObjectID($id)));
+		$item = $connection->challengedb->items->findOne(array('_id' => new MongoID($id)));
 		return $item;
 	}
 }
