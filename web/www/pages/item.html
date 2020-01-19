@@ -1,4 +1,3 @@
-<h1>Create</h1>
 <span>Description:</span>
 <textarea id="description" rows="1" cols="50" maxlength="300"></textarea>
 <br>
@@ -8,9 +7,6 @@
 <input type="button" id="submit" value="Create">&nbsp; <input type="button" id="cancel" value="Cancel">&nbsp;
 
 <script>
-
-	//request.getParameter()
-
 	$('#cancel').click(e => {
 		url = "pages/list.html";
 		url += '?_=' + (new Date()).getTime();

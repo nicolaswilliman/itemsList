@@ -36,15 +36,15 @@
 					items.disableSelection();
 
 					$('#create').click(() => {
-						url = "pages/create.html";
+						let url = "pages/item.html";
 						url += '?_=' + (new Date()).getTime();
 						$('#content').load(url);
 					});
 
 					$('a').click(function(){
-						console.log($(this).data('id'));
-
-						//$('#content').load(url,  {id: 'test'})
+						let url = "pages/item.html";
+						url += '?_=' + (new Date()).getTime();
+						$('#content').load(url,  {id: 'test'})
 						return false;
 					});
 				},
