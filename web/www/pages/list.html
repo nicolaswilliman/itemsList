@@ -22,9 +22,10 @@
 					$('#title').text('Items list (COUNT: ' + parsedResponse.count + ')');
 					$.each(parsedResponse.items, (key, data) => {
 						html += '<li class="item">';
-						html += '<a class="edit" href data-id="' + data._id.$oid +'">Edit</a>&nbsp';
-						html += '<a class="delete" href data-id="' + data._id.$oid +'" data-desc="' + data.description +'">Delete</a>&nbsp';
+						html += '<a class="edit" href data-id="' + data._id +'">Edit</a>&nbsp';
+						html += '<a class="delete" href data-id="' + data._id +'" data-desc="' + data.description +'">Delete</a>&nbsp';
 						html += '<span>' + data.description + '</span>';
+						html += '<img src="' + data.image + '"">';
 						html += '</li>';
 					});
 					html += '</ul>';

@@ -4,13 +4,15 @@ require_once(dirname(dirname(__FILE__)). "/data_access/repository.php");
 
 class Functions {
 
-	//const IMAGES_FOLDER = dirname(dirname(__DIR__)) . "/images/";
+
+	const IMAGES_FOLDER = "http://challenge.test.com/images/";
 
 	public static function getItems(){
 		$items = Repository::getAllItems();
-		// foreach($items as  $key=>$item){
-		// 	$items[$key]->image = self::IMAGES_FOLDER . "$item->id/$item->ext";
-		// }
+		foreach($items as  $key=>$item){
+			$items[$key]->_id = (string)$item->_id;
+			$items[$key]->image = self::IMAGES_FOLDER . "$item->_id.$item->ext";
+		}
 		return $items;
 	}
 

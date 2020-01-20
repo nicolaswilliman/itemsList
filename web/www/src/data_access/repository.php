@@ -35,7 +35,7 @@ class Repository {
 			"ext" => $ext,
 		];
 		$ret = $items->insertOne($item);
-		return json_decode(json_encode($ret->getInsertedId()))->{'$oid'}; //TODO CHECK THIS UGLY THING
+		return (string)$ret->getInsertedId();
 	}
 
 	public static function updateItem($id, $description, $ext){
