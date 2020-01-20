@@ -3,17 +3,24 @@
 require_once(dirname(dirname(__FILE__)). "/data_access/repository.php");
 
 class Functions {
+
+	//const IMAGES_FOLDER = dirname(dirname(__DIR__)) . "/images/";
+
 	public static function getItems(){
 		$items = Repository::getAllItems();
+		// foreach($items as  $key=>$item){
+		// 	$items[$key]->image = self::IMAGES_FOLDER . "$item->id/$item->ext";
+		// }
 		return $items;
 	}
 
-	public static function saveItem($id, $desc, $image){
+	public static function saveItem($id, $desc, $ext){
 		if($id){
-			Repository::updateItem($id, $desc, $image);
+			$retId = Repository::updateItem($id, $desc, $ext);
 		}else{
-			Repository::createItem($desc, $image);
+			$retId = Repository::createItem($desc, $ext);
 		}
+		return $retId;
 	}
 
 	public static function deleteItem($id){

@@ -20,26 +20,33 @@ class Repository {
 	public static function getAllItems(){
 		$connection = self::getInstance();
 		$cursor = $connection->challengedb->items->find();
-		$items = array();
+		$items = [];
 		foreach($cursor as $doc){
 			array_push($items, $doc);
 		}
 		return $items;
 	}
 
-	public static function createItem($description, $image){
+	public static function createItem($description, $ext){
 		$connection = self::getInstance();
 		$items = $connection->challengedb->items;
-		$item = array(
-			"description" => $description
-		);
-		$items->insertOne($item);
+		$item = [
+			"description" => $description,
+			"ext" => $ext,
+		];
+		$ret = $items->insertOne($item);
+		return json_decode(json_encode($ret->getInsertedId()))->{'$oid'}; //TODO CHECK THIS UGLY THING
 	}
 
-	public static function updateItem($id, $description, $image){
+	public static function updateItem($id, $description, $ext){
 		$connection = self::getInstance();
 		$items = $connection->challengedb->items;
-		$items->updateOne(["_id" => new MongoID($id)], ['$set' => ["description" => $description]]);
+		$item = ['$set' => [
+			"description" => $description,
+			"ext" => $ext,
+			]
+		];
+		$items->updateOne(["_id" => new MongoID($id)], $item);
 	}
 
 	public static function deleteItem($id){
