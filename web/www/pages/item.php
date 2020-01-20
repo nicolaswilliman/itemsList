@@ -55,7 +55,7 @@ if($id){
 				$('#content').load(url);
 			},
 			error: (xhr, status, error) => {
-				console.log(xhr.responseText);
+				alert(xhr.responseText);
 			}
 		});
 		return false;

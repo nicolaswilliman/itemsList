@@ -81,8 +81,7 @@
 					});
 				},
 				error: (xhr, status, error) => {
-					const errorMsg = 'Request failed';
-					$('#content').html(errorMsg);
+					alert("Couldn't get items. Try again please.");
 				}
 			});
 		});
