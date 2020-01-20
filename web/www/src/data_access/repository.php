@@ -41,11 +41,13 @@ class Repository {
 	public static function updateItem($id, $description, $ext){
 		$connection = self::getInstance();
 		$items = $connection->challengedb->items;
-		$item = ['$set' => [
-			"description" => $description,
-			"ext" => $ext,
-			]
-		];
+		$item = [];
+		if($description){
+			$item['$set']["description"] = $description;
+		}
+		if($ext){
+			$item['$set']["ext"] = $ext;
+		}
 		$items->updateOne(["_id" => new MongoID($id)], $item);
 	}
 

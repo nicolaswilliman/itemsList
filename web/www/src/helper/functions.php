@@ -4,7 +4,6 @@ require_once(dirname(dirname(__FILE__)). "/data_access/repository.php");
 
 class Functions {
 
-
 	const IMAGES_FOLDER = "http://challenge.test.com/images/";
 
 	public static function getItems(){
@@ -16,13 +15,13 @@ class Functions {
 		return $items;
 	}
 
-	public static function saveItem($id, $desc, $ext){
-		if($id){
-			$retId = Repository::updateItem($id, $desc, $ext);
-		}else{
-			$retId = Repository::createItem($desc, $ext);
-		}
+	public static function createItem($desc, $ext){
+		$retId = Repository::createItem($desc, $ext);
 		return $retId;
+	}
+
+	public static function updateItem($id, $desc, $ext){
+		Repository::updateItem($id, $desc, $ext);
 	}
 
 	public static function deleteItem($id){
