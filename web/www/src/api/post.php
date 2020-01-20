@@ -40,7 +40,7 @@ $description = $_POST["description"];
 if(!$id){ //create
 	$id = 0;
 	if(!isDescriptionValid($description, $maxLength)){
-		echo "Invalid description, max length is $maxLength";
+		echo "Invalid description.";
 		http_response_code(400);
 		exit;
 	}
@@ -54,7 +54,7 @@ if(!$id){ //create
 	saveImage($id, $ext);
 }else{ //edit
 	if(!isDescriptionValid($description, $maxLength)){
-		echo "Invalid description, max length is $maxLength";
+		echo "Invalid description.";
 		http_response_code(400);
 		exit;
 	}
