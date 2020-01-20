@@ -20,8 +20,8 @@ class Functions {
 		return $retId;
 	}
 
-	public static function updateItem($id, $desc, $ext){
-		Repository::updateItem($id, $desc, $ext);
+	public static function updateItem($id, $desc, $ext, $index = null){
+		Repository::updateItem($id, $desc, $ext, $index);
 	}
 
 	public static function deleteItem($id){

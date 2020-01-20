@@ -21,7 +21,7 @@
 
 					$('#title').text('Items list (COUNT: ' + parsedResponse.count + ')');
 					$.each(parsedResponse.items, (key, data) => {
-						html += '<li class="item">';
+						html += '<li class="item" data-id="' + data._id + '">';
 						html += '<a class="edit" href data-id="' + data._id +'">Edit</a>&nbsp';
 						html += '<a class="delete" href data-id="' + data._id +'" data-desc="' + data.description +'">Delete</a>&nbsp';
 						html += '<span>' + data.description + '</span>';
@@ -35,8 +35,25 @@
 					items.sortable({
 						update: (event, ui) => {
 							let list = [];
-							$('#items li').each((idx, elem) => {
-								list[idx] = $(elem).html();
+							$('#items li').each(function(idx, elem){
+								list[idx] = $(this).data('id');
+							});
+
+							$.ajax({
+								url: 'src/api/sort.php',
+								type: 'post',
+								data: {
+									itemsList: list,
+								},
+								success: response => {
+									let url = 'pages/list.html';
+									url += '?_=' + (new Date()).getTime();
+									$('#content').load(url);
+								},
+								error: (xhr, status, error) => {
+									console.log(xhr.responseText)
+									//alert('An error had happened, please try again.');
+								}
 							});
 						}
 					});
@@ -71,7 +88,7 @@
 									$('#content').load(url);
 								},
 								error: (xhr, status, error) => {
-
+									alert('An error had happened, please try again.');
 								}
 							});
 						}

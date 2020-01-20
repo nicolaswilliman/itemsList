@@ -33,12 +33,13 @@ class Repository {
 		$item = [
 			"description" => $description,
 			"ext" => $ext,
+			"index" => self::getNewIndex(),
 		];
 		$ret = $items->insertOne($item);
 		return (string)$ret->getInsertedId();
 	}
 
-	public static function updateItem($id, $description, $ext){
+	public static function updateItem($id, $description, $ext, $index){
 		$connection = self::getInstance();
 		$items = $connection->challengedb->items;
 		$item = [];
@@ -47,6 +48,9 @@ class Repository {
 		}
 		if($ext){
 			$item['$set']["ext"] = $ext;
+		}
+		if($index){
+			$item['$set']["index"] = $index;
 		}
 		$items->updateOne(["_id" => new MongoID($id)], $item);
 	}
@@ -61,5 +65,13 @@ class Repository {
 		$connection = self::getInstance();
 		$item = $connection->challengedb->items->findOne(["_id" => new MongoID($id)]);
 		return $item;
+	}
+
+	public static function getNewIndex(){
+		$connection = self::getInstance();
+		$items = $connection->challengedb->items;
+		$options = ['sort' => ['index' => -1]]; // -1 is for desc
+		$result = $items->findOne([], $options);
+		return $result->index + 1;
 	}
 }
