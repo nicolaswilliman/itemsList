@@ -25,7 +25,7 @@
 						html += '<a class="edit" href data-id="' + data._id +'">Edit</a>&nbsp';
 						html += '<a class="delete" href data-id="' + data._id +'" data-desc="' + data.description +'">Delete</a>&nbsp';
 						html += '<span>' + data.description + '</span>';
-						html += '<img src="' + data.image + '"">';
+						html += '<img style="width: 125px;" src="' + data.image + '?_=' + (new Date()).getTime() + '"">';
 						html += '</li>';
 					});
 					html += '</ul>';
@@ -44,15 +44,6 @@
 								type: 'post',
 								data: {
 									itemsList: list,
-								},
-								success: response => {
-									let url = 'pages/list.html';
-									url += '?_=' + (new Date()).getTime();
-									$('#content').load(url);
-								},
-								error: (xhr, status, error) => {
-									console.log(xhr.responseText)
-									//alert('An error had happened, please try again.');
 								}
 							});
 						}
