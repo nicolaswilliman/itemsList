@@ -18,7 +18,7 @@ if($id){
 <form id="form" enctype="multipart/form-data" method="POST">
 	<h1><?php echo $title?></h1>
 	<span>Description (max 300 chars):</span>
-	<input type="text" id="description" maxlength="300" value="<?php echo $item->description?>">
+	<input type="text" id="description" maxlength="300" value="<?php echo $description?>">
 	<br>
 	<span>Image:</span>
 	<input type="file" id="image" name="image">

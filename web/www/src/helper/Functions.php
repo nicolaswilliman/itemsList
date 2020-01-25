@@ -8,7 +8,7 @@ class Functions {
 
 	public static function getItems(){
 		$items = Repository::getAllItems();
-		foreach($items as  $key=>$item){
+		foreach($items as $key=>$item){
 			$items[$key]->_id = (string)$item->_id;
 			$items[$key]->image = self::IMAGES_FOLDER . "$item->_id.$item->ext";
 		}

@@ -3,12 +3,17 @@
 require_once(dirname(__DIR__)."/helper/Functions.php");
 $maxLength = 300;
 
-function isImageUploaded(){
+
+function isFileUploaded(){
+	return file_exists($_FILES["image"]["tmp_name"]) && is_uploaded_file($_FILES["image"]["tmp_name"]);
+}
+
+function isFileAnImage(){
 	$isImage = getimagesize($_FILES["image"]["tmp_name"]);
 	return $isImage !== false;
 }
 
-function isImageValid(){
+function isExtensionValid(){
 	$ext = strtolower(end((explode(".", $_FILES["image"]["name"]))));
 	return ($ext == "jpg" || $ext == "png" || $ext == "gif");
 }
@@ -44,7 +49,7 @@ if(!$id){ //create
 		http_response_code(400);
 		exit;
 	}
-	if(!isImageUploaded() || !isImageValid()){
+	if(!isFileAnImage() || !isExtensionValid()){
 		echo "Invalid image. File must be an image and the extension should be jpg/png/gif.";
 		http_response_code(400);
 		exit;
@@ -58,8 +63,8 @@ if(!$id){ //create
 		http_response_code(400);
 		exit;
 	}
-	if(isImageUploaded()){
-		if(!isImageValid()){
+	if(isFileAnImage()){
+		if(!isExtensionValid()){
 			echo "Invalid image. File must be an image and the extension should be jpg/png/gif.";
 			http_response_code(400);
 			exit;
