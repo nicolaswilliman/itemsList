@@ -1,6 +1,6 @@
 <?php
 
-require_once(dirname(dirname(__FILE__))."/helper/functions.php");
+require_once(dirname(__DIR__)."/helper/functions.php");
 
 $itemsIds = $_POST["itemsList"];
 $index = 1;

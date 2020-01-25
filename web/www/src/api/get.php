@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(dirname(__FILE__))."/helper/functions.php");
+require_once(dirname(__DIR__)."/helper/functions.php");
 
 function compare($item, $anotherItem){
 	return $item->index > $anotherItem->index;
@@ -8,8 +8,6 @@ function compare($item, $anotherItem){
 $items = Functions::getItems();
 
 usort($items, "compare");
-// echo json_encode($items);
-// exit;
 $response = new stdClass();
 $response->items = $items;
 $response->count = count($items);
