@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__DIR__)."/helper/functions.php");
+require_once(dirname(__DIR__)."/helper/Functions.php");
 
 function compare($item, $anotherItem){
 	return $item->index > $anotherItem->index;

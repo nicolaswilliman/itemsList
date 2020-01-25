@@ -1,6 +1,6 @@
 <?php
 
-require_once(dirname(dirname(__FILE__)). "/data_access/repository.php");
+require_once(dirname(__DIR__). "/data_access/Repository.php");
 
 class Functions {
 

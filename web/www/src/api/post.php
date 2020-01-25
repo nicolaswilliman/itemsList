@@ -1,6 +1,6 @@
 <?php
 
-require_once(dirname(__DIR__)."/helper/functions.php");
+require_once(dirname(__DIR__)."/helper/Functions.php");
 $maxLength = 300;
 
 function isImageUploaded(){

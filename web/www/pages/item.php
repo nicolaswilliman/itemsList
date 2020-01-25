@@ -1,6 +1,6 @@
 <?php
 
-include_once(dirname(dirname(__FILE__)) . "/src/helper/functions.php");
+include_once(dirname(__DIR__) . "/src/helper/Functions.php");
 
 $id = $_GET["id"];
 if($id){
