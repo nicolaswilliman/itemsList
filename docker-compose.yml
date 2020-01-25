@@ -15,10 +15,8 @@ services:
       - /etc/hosts:/etc/hosts
     depends_on:
       - database
-    networks:
-      - backend
   database:
-    image: 'mongo'
+    image: 'mongo:4.2.2'
     container_name: 'mongo-db'
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
@@ -29,9 +27,3 @@ services:
       - ./web/docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
     ports:
       - '27017:27017'
-    networks:
-      - backend
-#TODO: check if network is needed
-networks:
-    backend:
-        driver: bridge
