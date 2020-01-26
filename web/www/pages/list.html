@@ -1,10 +1,5 @@
 <h1 id="title"></h1>
 
-<style>
-	li:hover {
-		cursor: move;
-	}
-</style>
 <input type="button" id="create" value="Create new item">
 <div id="list"></div>
 
@@ -21,11 +16,13 @@
 
 					$('#title').text('Items list (COUNT: ' + parsedResponse.count + ')');
 					$.each(parsedResponse.items, (key, data) => {
-						html += '<li class="item" data-id="' + data.id + '">';
+						html += '<li data-id="' + data.id + '">';
+						html += '<div id="container">';
 						html += '<a class="edit" href data-id="' + data.id +'">Edit</a>&nbsp';
 						html += '<a class="delete" href data-id="' + data.id +'" data-desc="' + data.description +'">Delete</a>&nbsp';
 						html += '<span>' + data.description + '</span>';
-						html += '<img style="width: 125px;" src="' + data.image + '?_=' + (new Date()).getTime() + '"">';
+						html += '</div>&nbsp';
+						html += '<img src="' + data.image + '?_=' + (new Date()).getTime() + '"">';
 						html += '</li>';
 					});
 					html += '</ul>';

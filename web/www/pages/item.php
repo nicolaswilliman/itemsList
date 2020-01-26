@@ -17,7 +17,7 @@ if($id){
 }
 ?>
 
-<form id="form">
+<form id="form" style="display: inline-block">
 	<h1><?php echo $title?></h1>
 	<span>Description (max 300 chars):</span>
 	<input type="text" id="description" maxlength="300" value="<?php echo $description?>">
@@ -25,7 +25,10 @@ if($id){
 	<span>Image:</span>
 	<input type="file" id="image" name="image">
 	<br>
-	<input type="submit" id="submit" value="<?php echo $submitName ?>">&nbsp; <input type="button" id="cancel" value="Cancel">&nbsp;
+	<div style="margin: 5px 0; text-align:center">
+		<input type="submit" id="submit" value="<?php echo $submitName ?>">
+		<input type="button" id="cancel" value="Cancel">
+	</div>
 </form>
 
 <script>
