@@ -1,11 +1,18 @@
 <?php
 
 include_once(dirname(__DIR__) . "/business/Item.php");
-$maxLength = 300;
-
+const MAX_LENGTH = 300;
 
 function isFileUploaded(){
 	return file_exists($_FILES["image"]["tmp_name"]) && is_uploaded_file($_FILES["image"]["tmp_name"]);
+}
+
+function validateImage(){
+	if(!isFileAnImage() || !isExtensionValid()){
+		echo "Invalid image. File must be an image and the extension can be jpg/png/gif.";
+		http_response_code(400);
+		exit;
+	}
 }
 
 function isFileAnImage(){
@@ -41,35 +48,32 @@ function isDescriptionValid($description, $maxLength){
 $id = $_POST["id"];
 $description = $_POST["description"];
 
-//VALIDATIONS
+if(!$description){
+	echo "Description is empty.";
+	http_response_code(400);
+	exit;
+}
+
+if(!isDescriptionValid($description, MAX_LENGTH)){
+	echo "Invalid description. Max length is " . MAX_LENGTH . " char.";
+	http_response_code(400);
+	exit;
+}
+
 if(!$id){ //create
-	$id = 0;
-	if(!isDescriptionValid($description, $maxLength)){
-		echo "Invalid description.";
+	if(!isFileUploaded()){
+		echo "No image uploaded. Please, choose an image.";
 		http_response_code(400);
 		exit;
 	}
-	if(!isFileAnImage() || !isExtensionValid()){
-		echo "Invalid image. File must be an image and the extension should be jpg/png/gif.";
-		http_response_code(400);
-		exit;
-	}
+	validateImage();
 	$ext = strtolower(pathinfo($_FILES["image"]["name"])["extension"]);
 	$id = Item::createItem($description, $ext);
 	saveImage($id, $ext);
 }else{ //edit
-	if(!isDescriptionValid($description, $maxLength)){
-		echo "Invalid description.";
-		http_response_code(400);
-		exit;
-	}
-	if(isFileAnImage()){
-		if(!isExtensionValid()){
-			echo "Invalid image. File must be an image and the extension should be jpg/png/gif.";
-			http_response_code(400);
-			exit;
-		}
-		$ext = strtolower(end((explode(".", $_FILES["image"]["name"]))));
+	if(isFileUploaded()){
+		validateImage();
+		$ext = strtolower(pathinfo($_FILES["image"]["name"])["extension"]);
 		saveImage($id, $ext);
 	}
 	Item::updateItem($id, $description, $ext);

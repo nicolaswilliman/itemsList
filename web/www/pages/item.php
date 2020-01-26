@@ -9,13 +9,14 @@ if($id){
 	$title = "Edit item";
 	$submitName = "Update";
 }else{
+	$id = 0;
 	$description = "";
 	$title = "New item";
 	$submitName = "Create";
 }
 ?>
 
-<form id="form" enctype="multipart/form-data" method="POST">
+<form id="form">
 	<h1><?php echo $title?></h1>
 	<span>Description (max 300 chars):</span>
 	<input type="text" id="description" maxlength="300" value="<?php echo $description?>">
@@ -37,9 +38,15 @@ if($id){
 
 	$('form').submit(function(e){
 
-		const formData = new FormData(this);
-		formData.append('description', $('#description').val());
-		formData.append('id', <?php echo "'".$id ."'"?>);
+		const formData = new FormData();
+		const id = <?php echo "'".$id ."'"?>;
+		const image = $('#image').prop('files')[0];
+		const description = $('#description').val();
+
+		if(id) formData.append('id', id);
+		if(image) formData.append('image', image);
+		if(description) formData.append('description', description);
+
 		$.ajax({
 			url: 'src/api/post.php',
 			type: 'post',
