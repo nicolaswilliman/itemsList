@@ -1,6 +1,7 @@
 <?php
 
-include_once(dirname(__DIR__) . "/src/business/Item.php");
+include_once(dirname(__DIR__) . "/config.php");
+include_once(BUSINESS_FOLDER . "Item.php");
 
 $id = $_GET["id"];
 if($id){
