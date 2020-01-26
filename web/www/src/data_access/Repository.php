@@ -47,7 +47,7 @@ class Repository {
 			$item['$set']["description"] = $description;
 		}
 		if($imageExt){
-			$item['$set']["ext"] = $imageExt;
+			$item['$set']["imageExt"] = $imageExt;
 		}
 		if($index){
 			$item['$set']["index"] = $index;

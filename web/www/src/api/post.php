@@ -2,6 +2,8 @@
 
 include_once(dirname(__DIR__) . "/business/Item.php");
 const MAX_LENGTH = 300;
+const VALID_EXT = ["jpg", "png", "gif"];
+define("IMAGES_FOLDER", realpath(dirname(dirname(__DIR__))) . "/images/");
 
 function isFileUploaded(){
 	return file_exists($_FILES["image"]["tmp_name"]) && is_uploaded_file($_FILES["image"]["tmp_name"]);
@@ -22,22 +24,28 @@ function isFileAnImage(){
 
 function isExtensionValid(){
 	$imageExt = strtolower(pathinfo($_FILES["image"]["name"])["extension"]);
-	return ($imageExt == "jpg" || $imageExt == "png" || $imageExt == "gif");
+	foreach(VALID_EXT as $ext){
+		if($imageExt == $ext) return true;
+	}
+	return false;
 }
 
 function saveImage($id, $imageExt){
-
-	$item = Item::getItem($id);
-	$fileName = realpath(dirname(dirname(__DIR__))) . "/images/$id.$imageExt";
-	$oldFileName = realpath(dirname(dirname(__DIR__))) . "/images/$id.$item->imageExt";
-	if(file_exists($oldFileName)){
-		unlink($oldFileName);
-	}
-
+	$fileName = IMAGES_FOLDER . "$id.$imageExt";
+	deleteRelatedImages($id);
 	if (!move_uploaded_file($_FILES["image"]["tmp_name"], $fileName)){
 		echo "Error uploading image.";
 		http_response_code(500);
 		exit;
+	}
+}
+
+function deleteRelatedImages($id){
+	foreach(VALID_EXT as $ext){
+		$file = IMAGES_FOLDER . "$id.$ext";
+		if(file_exists($file)){
+			unlink($file);
+		}
 	}
 }
 
@@ -61,6 +69,7 @@ if(!isDescriptionValid($description, MAX_LENGTH)){
 }
 
 if(!$id){ //create
+	$id = 0;
 	if(!isFileUploaded()){
 		echo "No image uploaded. Please, choose an image.";
 		http_response_code(400);
@@ -68,7 +77,8 @@ if(!$id){ //create
 	}
 	validateImage();
 	$imageExt = strtolower(pathinfo($_FILES["image"]["name"])["extension"]);
-	$id = Item::createItem($description, $imageExt);
+	$item = new Item($id, $description, $imageExt);
+	$id = $item->save();
 	saveImage($id, $imageExt);
 }else{ //edit
 	if(isFileUploaded()){
@@ -76,7 +86,8 @@ if(!$id){ //create
 		$imageExt = strtolower(pathinfo($_FILES["image"]["name"])["extension"]);
 		saveImage($id, $imageExt);
 	}
-	Item::updateItem($id, $description, $imageExt);
+	$item = new Item($id, $description, $imageExt);
+	$item->save();
 }
 
 exit;

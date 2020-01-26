@@ -6,9 +6,9 @@ class Item {
 
 	const IMAGES_FOLDER = "http://challenge.test.com/images/";
 
-	public function __construct($id = 0, $desc = "", $imageExt = ""){
+	public function __construct($id = 0, $description = "", $imageExt = ""){
 		$this->id = $id;
-		$this->desc = $desc;
+		$this->description = $description;
 		$this->imageExt = $imageExt;
 		$this->image = self::IMAGES_FOLDER . "$id.$imageExt";
 	}
@@ -30,9 +30,10 @@ class Item {
 
 	public function save(){
 		if($this->id){
-			Repository::updateItem($this->id, $this->desc, $this->imageExt, $this->index);
+			Repository::updateItem($this->id, $this->description, $this->imageExt, $this->index);
+			return $this->id;
 		}else{
-			$retId = Repository::createItem($this->desc, $this->imageExt);
+			$retId = Repository::createItem($this->description, $this->imageExt);
 			return $retId;
 		}
 	}
