@@ -1,11 +1,11 @@
 <?php
 
-require_once(dirname(__DIR__)."/helper/Functions.php");
+include_once(dirname(__DIR__) . "/business/Item.php");
 
 $itemsIds = $_POST["itemsList"];
 $index = 1;
 foreach($itemsIds as $id){
-	Functions::updateItem($id, null, null, $index);
+	Item::updateItem($id, null, null, $index);
 	$index++;
 }
 

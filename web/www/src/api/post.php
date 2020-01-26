@@ -1,6 +1,6 @@
 <?php
 
-require_once(dirname(__DIR__)."/helper/Functions.php");
+include_once(dirname(__DIR__) . "/business/Item.php");
 $maxLength = 300;
 
 
@@ -20,7 +20,7 @@ function isExtensionValid(){
 
 function saveImage($id, $ext){
 
-	$item = Functions::getItem($id);
+	$item = Item::getItem($id);
 	$fileName = realpath(dirname(dirname(__DIR__))) . "/images/$id.$ext";
 	$oldFileName = realpath(dirname(dirname(__DIR__))) . "/images/$id.$item->ext";
 	if(file_exists($oldFileName)){
@@ -55,7 +55,7 @@ if(!$id){ //create
 		exit;
 	}
 	$ext = strtolower(end((explode(".", $_FILES["image"]["name"]))));
-	$id = Functions::createItem($description, $ext);
+	$id = Item::createItem($description, $ext);
 	saveImage($id, $ext);
 }else{ //edit
 	if(!isDescriptionValid($description, $maxLength)){
@@ -72,7 +72,7 @@ if(!$id){ //create
 		$ext = strtolower(end((explode(".", $_FILES["image"]["name"]))));
 		saveImage($id, $ext);
 	}
-	Functions::updateItem($id, $description, $ext);
+	Item::updateItem($id, $description, $ext);
 }
 
 exit;

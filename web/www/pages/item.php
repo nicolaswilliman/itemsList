@@ -1,10 +1,10 @@
 <?php
 
-include_once(dirname(__DIR__) . "/src/helper/Functions.php");
+include_once(dirname(__DIR__) . "/src/business/Item.php");
 
 $id = $_GET["id"];
 if($id){
-	$item = Functions::getItem($id);
+	$item = Item::getItem($id);
 	$description = $item->description;
 	$title = "Edit item";
 	$submitName = "Update";

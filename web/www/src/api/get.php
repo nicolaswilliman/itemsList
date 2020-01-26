@@ -1,11 +1,11 @@
 <?php
-require_once(dirname(__DIR__)."/helper/Functions.php");
+include_once(dirname(__DIR__) . "/business/Item.php");
 
 function compare($item, $anotherItem){
 	return $item->index > $anotherItem->index;
 }
 
-$items = Functions::getItems();
+$items = Item::getItems();
 
 usort($items, "compare");
 $response = new stdClass();
