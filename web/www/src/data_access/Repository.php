@@ -72,6 +72,10 @@ class Repository {
 		$items = $connection->challengedb->items;
 		$options = ['sort' => ['index' => -1]]; // -1 is for desc
 		$result = $items->findOne([], $options);
-		return $result->index + 1;
+		if($result){
+			return $result->index + 1;
+		}else{
+			return 0;
+		}
 	}
 }
