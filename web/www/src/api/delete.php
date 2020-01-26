@@ -1,6 +1,7 @@
 <?php
 
-include_once(dirname(__DIR__) . "/business/Item.php");
+include_once(dirname(dirname(__DIR__)) . "/config.php");
+include_once(BUSINESS_FOLDER . "Item.php");
 
 $id = $_POST["id"];
 
@@ -10,7 +11,7 @@ if(!$id){
 
 $item = Item::getItem($id);
 
-$fileName = realpath(dirname(dirname(__DIR__))) . "/images/$id.$item->imageExt";
+$fileName = IMAGES_FOLDER . "$id.$item->imageExt";
 
 if(file_exists($fileName)){
 	unlink($fileName);

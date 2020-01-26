@@ -21,9 +21,9 @@
 
 					$('#title').text('Items list (COUNT: ' + parsedResponse.count + ')');
 					$.each(parsedResponse.items, (key, data) => {
-						html += '<li class="item" data-id="' + data._id + '">';
-						html += '<a class="edit" href data-id="' + data._id +'">Edit</a>&nbsp';
-						html += '<a class="delete" href data-id="' + data._id +'" data-desc="' + data.description +'">Delete</a>&nbsp';
+						html += '<li class="item" data-id="' + data.id + '">';
+						html += '<a class="edit" href data-id="' + data.id +'">Edit</a>&nbsp';
+						html += '<a class="delete" href data-id="' + data.id +'" data-desc="' + data.description +'">Delete</a>&nbsp';
 						html += '<span>' + data.description + '</span>';
 						html += '<img style="width: 125px;" src="' + data.image + '?_=' + (new Date()).getTime() + '"">';
 						html += '</li>';

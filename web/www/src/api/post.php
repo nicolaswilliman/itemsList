@@ -1,9 +1,9 @@
 <?php
+include_once(dirname(dirname(__DIR__)) . "/config.php");
+include_once(BUSINESS_FOLDER . "Item.php");
 
-include_once(dirname(__DIR__) . "/business/Item.php");
 const MAX_LENGTH = 300;
 const VALID_EXT = ["jpg", "png", "gif"];
-define("IMAGES_FOLDER", realpath(dirname(dirname(__DIR__))) . "/images/");
 
 function isFileUploaded(){
 	return file_exists($_FILES["image"]["tmp_name"]) && is_uploaded_file($_FILES["image"]["tmp_name"]);

@@ -75,7 +75,7 @@ class Repository {
 		if($result){
 			return $result->index + 1;
 		}else{
-			return 0;
+			return 1;
 		}
 	}
 }

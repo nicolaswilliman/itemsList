@@ -1,26 +1,26 @@
 <?php
 
-require_once(dirname(__DIR__). "/data_access/Repository.php");
+include_once(dirname(dirname(__DIR__)) . "/config.php");
+include_once(DATA_ACCESS_FOLDER . "Repository.php");
 
 class Item {
 
-	const IMAGES_FOLDER = "http://challenge.test.com/images/";
-
-	public function __construct($id = 0, $description = "", $imageExt = ""){
+	public function __construct($id = 0, $description = null, $imageExt = null, $index = null){
 		$this->id = $id;
 		$this->description = $description;
 		$this->imageExt = $imageExt;
-		$this->image = self::IMAGES_FOLDER . "$id.$imageExt";
+		$this->image = IMAGES_URL . "$id.$imageExt";
+		$this->index = $index;
 	}
 
 	public static function getItems(){
 		$itemsList = Repository::getAllItems();
 		$items = [];
-		foreach($itemsList as $key=>$item){
-			$itemsList[$key]->_id = (string)$item->_id;
-			$itemsList[$key]->image = self::IMAGES_FOLDER . "$item->_id.$item->imageExt";
+		foreach($itemsList as $key=>$value){
+			$item = new Item((string)$value->_id, $value->description, $value->imageExt, $value->index);
+			array_push($items, $item);
 		}
-		return $itemsList;
+		return $items;
 	}
 
 	public static function getItem($id){
@@ -50,6 +50,4 @@ class Item {
 	public static function deleteItem($id){
 		Repository::deleteItem($id);
 	}
-
-
 }

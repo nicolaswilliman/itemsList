@@ -1,5 +1,6 @@
 <?php
-include_once(dirname(__DIR__) . "/business/Item.php");
+include_once(dirname(dirname(__DIR__)) . "/config.php");
+include_once(BUSINESS_FOLDER . "Item.php");
 
 function compare($item, $anotherItem){
 	return $item->index > $anotherItem->index;
