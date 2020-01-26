@@ -14,7 +14,7 @@ function isFileAnImage(){
 }
 
 function isExtensionValid(){
-	$ext = strtolower(pathinfo(".", $_FILES["image"]["name"]));
+	$ext = strtolower(pathinfo($_FILES["image"]["name"])["extension"]);
 	return ($ext == "jpg" || $ext == "png" || $ext == "gif");
 }
 
@@ -54,7 +54,7 @@ if(!$id){ //create
 		http_response_code(400);
 		exit;
 	}
-	$ext = strtolower(pathinfo(".", $_FILES["image"]["name"]));
+	$ext = strtolower(pathinfo($_FILES["image"]["name"])["extension"]);
 	$id = Item::createItem($description, $ext);
 	saveImage($id, $ext);
 }else{ //edit
