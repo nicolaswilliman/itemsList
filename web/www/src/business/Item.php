@@ -18,32 +18,32 @@ class Item {
 		$items = [];
 		foreach($itemsList as $key=>$item){
 			$itemsList[$key]->_id = (string)$item->_id;
-			$itemsList[$key]->image = self::IMAGES_FOLDER . "$item->_id.$item->ext";
+			$itemsList[$key]->image = self::IMAGES_FOLDER . "$item->_id.$item->imageExt";
 		}
 		return $itemsList;
 	}
 
 	public static function getItem($id){
 		$item = Repository::getItem($id);
-		return $item;
+		return new Item($id, $item->description, $item->imageExt);
 	}
 
 	public function save(){
 		if($this->id){
-			Repository::updateItem($this->id, $this->desc, $this->ext, $this->index);
+			Repository::updateItem($this->id, $this->desc, $this->imageExt, $this->index);
 		}else{
-			$retId = Repository::createItem($this->desc, $this->ext);
+			$retId = Repository::createItem($this->desc, $this->imageExt);
 			return $retId;
 		}
 	}
 
-	public static function createItem($desc, $ext){
-		$retId = Repository::createItem($desc, $ext);
+	public static function createItem($desc, $imageExt){
+		$retId = Repository::createItem($desc, $imageExt);
 		return $retId;
 	}
 
-	public static function updateItem($id, $desc, $ext, $index = null){
-		Repository::updateItem($id, $desc, $ext, $index);
+	public static function updateItem($id, $desc, $imageExt, $index = null){
+		Repository::updateItem($id, $desc, $imageExt, $index);
 	}
 
 	public static function deleteItem($id){

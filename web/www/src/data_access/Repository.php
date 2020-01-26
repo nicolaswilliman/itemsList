@@ -27,27 +27,27 @@ class Repository {
 		return $items;
 	}
 
-	public static function createItem($description, $ext){
+	public static function createItem($description, $imageExt){
 		$connection = self::getInstance();
 		$items = $connection->challengedb->items;
 		$item = [
 			"description" => $description,
-			"ext" => $ext,
+			"imageExt" => $imageExt,
 			"index" => self::getNewIndex(),
 		];
 		$ret = $items->insertOne($item);
 		return (string)$ret->getInsertedId();
 	}
 
-	public static function updateItem($id, $description, $ext, $index){
+	public static function updateItem($id, $description, $imageExt, $index){
 		$connection = self::getInstance();
 		$items = $connection->challengedb->items;
 		$item = [];
 		if($description){
 			$item['$set']["description"] = $description;
 		}
-		if($ext){
-			$item['$set']["ext"] = $ext;
+		if($imageExt){
+			$item['$set']["ext"] = $imageExt;
 		}
 		if($index){
 			$item['$set']["index"] = $index;

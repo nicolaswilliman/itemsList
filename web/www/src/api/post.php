@@ -21,15 +21,15 @@ function isFileAnImage(){
 }
 
 function isExtensionValid(){
-	$ext = strtolower(pathinfo($_FILES["image"]["name"])["extension"]);
-	return ($ext == "jpg" || $ext == "png" || $ext == "gif");
+	$imageExt = strtolower(pathinfo($_FILES["image"]["name"])["extension"]);
+	return ($imageExt == "jpg" || $imageExt == "png" || $imageExt == "gif");
 }
 
-function saveImage($id, $ext){
+function saveImage($id, $imageExt){
 
 	$item = Item::getItem($id);
-	$fileName = realpath(dirname(dirname(__DIR__))) . "/images/$id.$ext";
-	$oldFileName = realpath(dirname(dirname(__DIR__))) . "/images/$id.$item->ext";
+	$fileName = realpath(dirname(dirname(__DIR__))) . "/images/$id.$imageExt";
+	$oldFileName = realpath(dirname(dirname(__DIR__))) . "/images/$id.$item->imageExt";
 	if(file_exists($oldFileName)){
 		unlink($oldFileName);
 	}
@@ -67,16 +67,16 @@ if(!$id){ //create
 		exit;
 	}
 	validateImage();
-	$ext = strtolower(pathinfo($_FILES["image"]["name"])["extension"]);
-	$id = Item::createItem($description, $ext);
-	saveImage($id, $ext);
+	$imageExt = strtolower(pathinfo($_FILES["image"]["name"])["extension"]);
+	$id = Item::createItem($description, $imageExt);
+	saveImage($id, $imageExt);
 }else{ //edit
 	if(isFileUploaded()){
 		validateImage();
-		$ext = strtolower(pathinfo($_FILES["image"]["name"])["extension"]);
-		saveImage($id, $ext);
+		$imageExt = strtolower(pathinfo($_FILES["image"]["name"])["extension"]);
+		saveImage($id, $imageExt);
 	}
-	Item::updateItem($id, $description, $ext);
+	Item::updateItem($id, $description, $imageExt);
 }
 
 exit;

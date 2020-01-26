@@ -10,7 +10,7 @@ if(!$id){
 
 $item = Item::getItem($id);
 
-$fileName = realpath(dirname(dirname(__DIR__))) . "/images/$id.$item->ext";
+$fileName = realpath(dirname(dirname(__DIR__))) . "/images/$id.$item->imageExt";
 
 if(file_exists($fileName)){
 	unlink($fileName);
