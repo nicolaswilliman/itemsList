@@ -1,4 +1,4 @@
-# Ubuntu instructions
+# Ubuntu installation instructions
 
 Clone this repository into the directory `/var/www/` running `$ git clone https://github.com/nicolaswilliman/itemsList.git`.
 
