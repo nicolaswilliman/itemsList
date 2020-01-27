@@ -1,7 +1,3 @@
-# itemsList
-Items list exercise
-
-
 # Ubuntu instructions
 
 Clone this repository into the directory `/var/www/` running `$ git clone https://github.com/nicolaswilliman/itemsList.git`.
