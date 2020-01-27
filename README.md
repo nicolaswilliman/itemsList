@@ -13,7 +13,7 @@ Clone this repository into the directory `/var/www/` running `$ git clone https:
 
 Then, get into the repository directory and run `$ docker-compose up`.
 
-After the project is up, run `$ docker exec -it challenge-db bash` to get into the apache container to configure the environment.
+After the project is up, run `$ docker exec -it challenge-web bash` to get into the apache container to configure the environment.
 
 Then run the following commands in the apache container:
 * `$ composer install` (this will install PHP dependencies).
