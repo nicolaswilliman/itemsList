@@ -1,5 +1,14 @@
 # Ubuntu installation instructions
 
+## Prerequisites
+
+You need the following:
+* git
+* docker
+* docker-compose
+
+
+## Instructions
 Clone this repository into the directory `/var/www/` running `$ git clone https://github.com/nicolaswilliman/itemsList.git`.
 
 Then, get into the repository directory and run `$ docker-compose up`.
