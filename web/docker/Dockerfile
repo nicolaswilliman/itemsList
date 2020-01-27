@@ -36,5 +36,3 @@ COPY docker/vhost.conf /etc/apache2/sites-available/
 RUN a2ensite vhost.conf
 
 WORKDIR /var/www/
-
-RUN chmod 777 /var/www/www/images/
