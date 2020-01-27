@@ -38,6 +38,7 @@ if($id){
 		let url = "pages/list.html";
 		url += '?_=' + (new Date()).getTime();
 		$('#content').load(url);
+		return false;
 	});
 
 	$('form').submit(function(e){

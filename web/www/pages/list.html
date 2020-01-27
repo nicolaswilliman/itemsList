@@ -52,6 +52,7 @@
 						let url = 'pages/item.php';
 						url += '?_=' + (new Date()).getTime();
 						$('#content').load(url);
+						return false;
 					});
 
 					$('a.edit').click(function(){
