@@ -37,8 +37,4 @@ RUN a2ensite vhost.conf
 
 WORKDIR /var/www/
 
-COPY . ./
-
 RUN chmod 777 /var/www/www/images/
-
-RUN composer install
