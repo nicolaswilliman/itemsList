@@ -39,4 +39,6 @@ WORKDIR /var/www/
 
 COPY . ./
 
+RUN mkdir /var/www/www/images/ && chmod 777 /var/www/www/images/
+
 RUN composer install
